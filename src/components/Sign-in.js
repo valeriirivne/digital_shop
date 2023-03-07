@@ -43,7 +43,7 @@ const SignInForm = () => {
       setEmail('');
       setPassword('');
     } catch (error) {
-      setError(error.message);
+      setError('No such user, please sign up the user');
       // dispatch sign-in failure action with error message as payload
       dispatch(signInFailure(error.message));
     }
