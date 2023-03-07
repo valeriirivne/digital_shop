@@ -10,6 +10,8 @@ import { setProducts } from '../features/cart/cartSlice';
 const SignInForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+
   const currentUser = useSelector((state) => state.user.currentUser);
   const userId = currentUser ? currentUser.uid : null;
   console.log(userId);
@@ -41,6 +43,7 @@ const SignInForm = () => {
       setEmail('');
       setPassword('');
     } catch (error) {
+      setError(error.message);
       // dispatch sign-in failure action with error message as payload
       dispatch(signInFailure(error.message));
     }
@@ -85,6 +88,7 @@ const SignInForm = () => {
       SIGN IN
       <Grid item xs={10} sm={6} md={4}>
         <form onSubmit={handleSignIn} sx={{ textAlign: 'left' }}>
+          {error && <div>{error}</div>}
           <TextField
             label='Email'
             type='email'
